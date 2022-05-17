@@ -54,10 +54,27 @@ struct AddRoundView: View {
                   
                     HStack {
                         Spacer()
-                        Button("Submit") {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Text("Cancel")
+                                .foregroundColor(Color.red)
+                                .bold()
+                        })
+                            .buttonStyle(.borderless)
+                        Spacer()
+                        Divider()
+                        Spacer()
+                        Button(action: {
                             DataController().addRound(courseName: courseName, par: Double(par), score: Double(score) ?? 0, context: managedObjContext)
                             dismiss()
-                        }
+                        }, label: {
+                            Text("Submit")
+                                .foregroundColor(Color.green)
+                                .bold()
+                        })
+                            .buttonStyle(.borderless)
+                        
                         Spacer()
                     }//HStack
                 }//Section

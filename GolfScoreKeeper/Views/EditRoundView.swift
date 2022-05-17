@@ -32,7 +32,7 @@ struct EditRoundView: View {
                         .onAppear{
                             courseName = round.courseName!
                             par = Int(round.par)
-                            score = String(round.score)
+                            score = String(Int(round.score))
                         }
                 }
                 .padding()
@@ -60,10 +60,26 @@ struct EditRoundView: View {
                 .padding()
                 HStack {
                     Spacer()
-                    Button("Update") {
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Text("Cancel")
+                            .foregroundColor(Color.red)
+                            .bold()
+                    })
+                        .buttonStyle(.borderless)
+                    Spacer()
+                    Divider()
+                    Spacer()
+                    Button(action: {
                         DataController().editRound(round: round, courseName: courseName, par: Double(par), score: Double(score) ?? 0, context: managedObjContext)
                         dismiss()
-                    }
+                    }, label: {
+                        Text("Update")
+                            .bold()
+                            .foregroundColor(Color.green)
+                    })
+                        .buttonStyle(.borderless)
                     Spacer()
                 }//VStack
             }
